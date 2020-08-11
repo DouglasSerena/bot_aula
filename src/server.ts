@@ -1,4 +1,5 @@
 import { User } from 'telegraf/typings/telegram-types';
+import express from 'express';
 import { Telegraf, Context } from 'telegraf';
 import puppeteer, { Browser } from 'puppeteer';
 import dotenv from 'dotenv';
@@ -61,3 +62,13 @@ async function requestAula(
 bot.launch();
 
 console.log('> start bot.'); // debug
+
+const app = express();
+app.get('/', (req, res) =>
+    res.status(200).json({
+        message:
+            'Acesse o telegram e procure por aula_status_bot e envie /status',
+    })
+);
+
+app.listen(3000, () => console.log('> server start'));

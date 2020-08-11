@@ -1,16 +1,12 @@
-'use strict';
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { default: obj };
-}
+"use strict"; function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _express = require('express'); var _express2 = _interopRequireDefault(_express);
 var _telegraf = require('telegraf');
-var _puppeteer = require('puppeteer');
-var _puppeteer2 = _interopRequireDefault(_puppeteer);
-var _dotenv = require('dotenv');
-var _dotenv2 = _interopRequireDefault(_dotenv);
+var _puppeteer = require('puppeteer'); var _puppeteer2 = _interopRequireDefault(_puppeteer);
+var _dotenv = require('dotenv'); var _dotenv2 = _interopRequireDefault(_dotenv);
 
 _dotenv2.default.config();
 
-const bot = new (0, _telegraf.Telegraf)(process.env.TOKEN_BOT);
+const bot = new (0, _telegraf.Telegraf)(process.env.TOKEN_BOT );
 
 const configBrowser = { headless: true };
 let browser;
@@ -20,7 +16,7 @@ bot.start(start);
 async function start(ctx) {
     if (!browser) browser = await _puppeteer2.default.launch(configBrowser);
 
-    const { first_name, last_name } = ctx.from;
+    const { first_name, last_name } = ctx.from ;
     console.log(`> connect bot: ${first_name} ${last_name}.`); // debug
 
     ctx.reply(`Welcome ${first_name} ${last_name} !!!\n > command /status.`); // return client
@@ -34,7 +30,7 @@ async function requestAula(
 ) {
     if (!browser) browser = await _puppeteer2.default.launch(configBrowser);
 
-    const { first_name, last_name } = ctx.from;
+    const { first_name, last_name } = ctx.from ;
     console.log(`> send a commands to bot: ${first_name} ${last_name}.`); // debug
 
     const page = await browser.newPage();
@@ -66,3 +62,13 @@ async function requestAula(
 bot.launch();
 
 console.log('> start bot.'); // debug
+
+const app = _express2.default.call(void 0, );
+app.get('/', (req, res) =>
+    res.status(200).json({
+        message:
+            'Acesse o telegram e procure por aula_status_bot e envie /status',
+    })
+);
+
+app.listen(3000, () => console.log('> server start'));
